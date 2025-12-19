@@ -40,7 +40,6 @@ function requireAuth(requiredRole = null) {
   }
 }
 
-// LOGIN FUNCTION
 function login(email, password) {
   const users = JSON.parse(localStorage.getItem("users")) || [];
   const user = users.find(u => u.email === email && u.password === password);
@@ -51,8 +50,17 @@ function login(email, password) {
   }
 
   localStorage.setItem("currentUser", JSON.stringify(user));
-  window.location.href = "index.html";
+
+  // Redirect based on role
+  if (user.role === "admin") {
+    window.location.href = "admin.html";
+  } else if (user.role === "agent") {
+    window.location.href = "dashboard.html";
+  } else {
+    window.location.href = "index.html";
+  }
 }
+
 
 // SIGNUP FUNCTION
 function signup(name, email, password, role) {
