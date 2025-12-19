@@ -428,3 +428,50 @@ footer {
     padding: 25px;
   }
 }
+
+/* Make tables scrollable on mobile */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Adjust dashboard layout for smaller screens */
+@media (max-width: 992px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 15px;
+  }
+
+  .sidebar a {
+    margin: 5px;
+    flex: 1 1 45%;
+    text-align: center;
+  }
+
+  .dashboard-content {
+    padding: 15px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+  }
+
+  .stat-card p {
+    font-size: 20px;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
