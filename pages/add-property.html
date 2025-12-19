@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Property | NaijaHomes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body class="auth-body">
+
+  <div class="auth-container">
+    <h2>Add / Edit Property</h2>
+
+    <form id="propertyForm" class="auth-form">
+      <input type="text" id="title" placeholder="Property Title" required>
+      <input type="text" id="location" placeholder="Location" required>
+      <input type="text" id="price" placeholder="Price (e.g., ₦2,500,000)" required>
+      <input type="text" id="image" placeholder="Image URL" required>
+
+      <button type="submit" class="btn-primary">Save Property</button>
+    </form>
+
+    <p class="auth-link"><a href="listing.html">Back to Listings</a></p>
+  </div>
+
+  <script src="../js/auth.js"></script>
+  <script src="../js/data.js"></script>
+  <script>
+    // Only agents can access this page
+    requireAuth("agent"); 
+    const currentUser = getCurrentUser();
+
+    const propertyForm = document.getElementById("propertyForm");
+    const editId = localStorage.getItem("editPropertyId");
+
+    // PREFILL FORM IF EDITING
+    if (editId) {
+      const property = properties.find(p => p.id === parseInt(editId));
+      if (property) {
+        document.getElementById("title").value = property.title;
+        document.getElementById("location").value = property.location;
+        document.getElementById("price").value = property.price;
+        document.getElementById("image").value = property.image;
+      }
+    }
+
+    propertyForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const title = document.getElementById("title").value.trim();
+      const location = document.getElementById("location").value.trim();
+      const price = document.getElementById("price").value.trim();
+      const image = document.getElementById("image").value.trim();
+
+      if (!title || !location || !price || !image) {
+        alert("Please fill all fields");
+        return;
+      }
+
+      if (editId) {
+        // UPDATE EXISTING PROPERTY
+        const index = properties.findIndex(p => p.id === parseInt(editId));
+        properties[index] = { ...properties[index], title, location, price, image };
+        localStorage.removeItem("editPropertyId");
+      } else {
+        // ADD NEW PROPERTY
+        const id = Date.now(); // unique ID
+        properties.push({ id, title, location, price, image });
+      }
+
+      // SAVE ONLY AGENT-ADDED PROPERTIES
+      localStorage.setItem("properties", JSON.stringify(properties.filter(p => p.id > 3)));
+
+      alert("Property saved successfully!");
+      window.location.href = "listing.html";
+    });
+  </script>
+</body>
+</html>

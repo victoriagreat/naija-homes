@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signup | NaijaHomes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body class="auth-body">
+
+  <div class="auth-container">
+    <h2>Signup</h2>
+
+    <form id="signupForm" class="auth-form">
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+
+      <select id="role" required>
+        <option value="">Select role</option>
+        <option value="user">User</option>
+        <option value="agent">Agent</option>
+      </select>
+
+      <button type="submit" class="btn-primary">Signup</button>
+    </form>
+
+    <p class="auth-link">Already have an account? <a href="login.html">Login here</a></p>
+  </div>
+
+  <script src="../js/auth.js"></script>
+  <script>
+    const signupForm = document.getElementById("signupForm");
+
+    signupForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const role = document.getElementById("role").value;
+
+      if (!name || !email || !password || !role) {
+        alert("Please fill all fields");
+        return;
+      }
+
+      signup(name, email, password, role);
+    });
+  </script>
+</body>
+</html>

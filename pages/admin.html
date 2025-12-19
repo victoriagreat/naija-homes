@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard | NaijaHomes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body>
+
+  <div class="dashboard">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <h2>Admin Panel</h2>
+      <a href="#" id="logoutBtn">Logout</a>
+      <a href="listing.html">View Listings</a>
+    </div>
+
+    <!-- DASHBOARD CONTENT -->
+    <div class="dashboard-content">
+      <h1>Admin Dashboard</h1>
+
+      <!-- STATS -->
+      <div class="stats">
+        <div class="stat-card">
+          <h3>Total Users</h3>
+          <p id="totalUsers">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Total Properties</h3>
+          <p id="totalProperties">0</p>
+        </div>
+      </div>
+
+      <!-- USERS TABLE -->
+      <h2>All Users</h2>
+      <table class="admin-table" id="usersTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <!-- PROPERTIES TABLE -->
+      <h2>All Properties</h2>
+      <table class="admin-table" id="propertiesTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="../js/auth.js"></script>
+  <script src="../js/data.js"></script>
+  <script>
+    requireAuth("admin");
+
+    const logoutBtn = document.getElementById("logoutBtn");
+    logoutBtn.addEventListener("click", () => logout());
+
+    // USERS
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    document.getElementById("totalUsers").innerText = users.length;
+
+    const usersTableBody = document.querySelector("#usersTable tbody");
+    users.forEach(user => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${user.id}</td>
+        <td>${user.name}</td>
+        <td>${user.email}</td>
+        <td>${user.role}</td>
+        <td><button class="danger delete-user" data-id="${user.id}">Delete</button></td>
+      `;
+      usersTableBody.appendChild(row);
+    });
+
+    document.querySelectorAll(".delete-user").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = parseInt(btn.dataset.id);
+        if (confirm("Are you sure you want to delete this user?")) {
+          const filteredUsers = users.filter(u => u.id !== id);
+          localStorage.setItem("users", JSON.stringify(filteredUsers));
+          location.reload();
+        }
+      });
+    });
+
+    // PROPERTIES
+    document.getElementById("totalProperties").innerText = properties.length;
+    const propertiesTableBody = document.querySelector("#propertiesTable tbody");
+    properties.forEach(p => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${p.id}</td>
+        <td>${p.title}</td>
+        <td>${p.location}</td>
+        <td>${p.price}</td>
+        <td><button class="danger delete-property" data-id="${p.id}">Delete</button></td>
+      `;
+      propertiesTableBody.appendChild(row);
+    });
+
+    document.querySelectorAll(".delete-property").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = parseInt(btn.dataset.id);
+        if (confirm("Are you sure you want to delete this property?")) {
+          properties = properties.filter(p => p.id !== id);
+          localStorage.setItem("properties", JSON.stringify(properties.filter(p => p.id > 3)));
+          location.reload();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

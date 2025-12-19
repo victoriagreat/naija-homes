@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Listings | NaijaHomes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <h1>NaijaHomes</h1>
+    <div>
+      <a href="../index.html">Home</a>
+      <a href="add-property.html">Add Property</a>
+      <a href="#" id="logoutBtn">Logout</a>
+    </div>
+  </nav>
+
+  <!-- MAIN LISTINGS -->
+  <div class="listings-container">
+    <div class="listings" id="listings"></div>
+  </div>
+
+  <script src="../js/auth.js"></script>
+  <script src="../js/data.js"></script>
+  <script>
+    // Protect page — only logged-in users
+    requireAuth();
+
+    const currentUser = getCurrentUser();
+    const listingsContainer = document.getElementById("listings");
+
+    // Render properties
+    function renderProperties() {
+      listingsContainer.innerHTML = "";
+      properties.forEach(property => {
+        const card = document.createElement("div");
+        card.className = "property-card";
+
+        card.innerHTML = `
+          <img src="${property.image}" alt="${property.title}">
+          <div class="content">
+            <h3>${property.title}</h3>
+            <p>${property.location}</p>
+            <p>${property.price}</p>
+            <a href="property.html?id=${property.id}">View Details</a>
+            ${currentUser.role === "agent" ? `
+              <button class="btn-primary edit-btn" data-id="${property.id}">Edit</button>
+              <button class="btn-outline delete-btn" data-id="${property.id}">Delete</button>
+            ` : ''}
+          </div>
+        `;
+
+        listingsContainer.appendChild(card);
+      });
+
+      addEventListeners();
+    }
+
+    // Add Edit/Delete functionality
+    function addEventListeners() {
+      // DELETE
+      document.querySelectorAll(".delete-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = parseInt(btn.dataset.id);
+          if (confirm("Are you sure you want to delete this property?")) {
+            properties = properties.filter(p => p.id !== id);
+            localStorage.setItem("properties", JSON.stringify(properties.filter(p => p.id > 3)));
+            renderProperties();
+          }
+        });
+      });
+
+      // EDIT
+      document.querySelectorAll(".edit-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = parseInt(btn.dataset.id);
+          localStorage.setItem("editPropertyId", id);
+          window.location.href = "add-property.html";
+        });
+      });
+    }
+
+    renderProperties();
+
+    // LOGOUT BUTTON
+    const logoutBtn = document.getElementById("logoutBtn");
+    logoutBtn.addEventListener("click", () => logout());
+  </script>
+</body>
+</html>
