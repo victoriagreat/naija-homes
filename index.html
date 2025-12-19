@@ -3,35 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>NaijaHomes | Find Your Dream Home</title>
-  <link rel="stylesheet" href="/styles/styles.css">
+  <link rel="stylesheet" href="styles/styles.css">
   <style>
-    /* Green & White Theme Overrides */
-    .navbar {
-      background: #28a745; /* green */
-    }
-    .navbar a {
-      color: white;
-      margin-left: 20px;
-      text-decoration: none;
-    }
+    .navbar { background: #28a745; }
+    .navbar a { color: white; margin-left: 20px; text-decoration: none; }
     .hero {
       background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)),
-                  url('/images/house1.jpg') center/cover no-repeat;
+                  url('images/house1.jpg') center/cover no-repeat;
       color: white;
       padding: 100px 20px;
       text-align: center;
     }
-    .search-box button {
-      background: #28a745;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .featured h2 {
-      color: #28a745;
-      text-align: center;
-      margin-bottom: 20px;
-    }
+    .search-box button { background: #28a745; color: white; border: none; cursor: pointer; }
+    .featured h2 { color: #28a745; text-align: center; margin-bottom: 20px; }
     .btn-primary {
       background: #28a745;
       color: white;
@@ -70,9 +54,7 @@
   <section class="featured">
     <h2>Featured Properties</h2>
 
-    <div class="property-grid" id="propertyGrid">
-      <!-- Properties will be inserted by JS -->
-    </div>
+    <div class="property-grid" id="propertyGrid"></div>
   </section>
 
   <!-- FOOTER -->
@@ -80,9 +62,8 @@
     <p>© 2025 NaijaHomes. All rights reserved.</p>
   </footer>
 
-  <script src="/js/data.js"></script>
+  <script src="js/data.js"></script>
   <script>
-    // Dynamically insert first 3 properties as featured
     const propertyGrid = document.getElementById("propertyGrid");
 
     properties.slice(0,3).forEach(p => {
@@ -94,7 +75,7 @@
           <h3>${p.title}</h3>
           <p>${p.location}</p>
           <p>${p.price}</p>
-          <a href="pages/property.html?id=${p.id}" class="btn-primary">View Details</a>
+          <a href="property.html?id=${p.id}" class="btn-primary">View Details</a>
         </div>
       `;
       propertyGrid.appendChild(card);

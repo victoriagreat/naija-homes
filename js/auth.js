@@ -24,19 +24,19 @@ function getCurrentUser() {
 // Logout user
 function logout() {
   localStorage.removeItem("currentUser");
-  window.location.href = "/pages/login.html";
+  window.location.href = "login.html";
 }
 
 // Protect page by role
 function requireAuth(requiredRole = null) {
   const user = getCurrentUser();
   if (!user) {
-    window.location.href = "/pages/login.html";
+    window.location.href = "login.html";
     return;
   }
   if (requiredRole && user.role !== requiredRole) {
     alert("Access denied");
-    window.location.href = "../index.html";
+    window.location.href = "index.html";
   }
 }
 
@@ -51,7 +51,7 @@ function login(email, password) {
   }
 
   localStorage.setItem("currentUser", JSON.stringify(user));
-  window.location.href = "../index.html";
+  window.location.href = "index.html";
 }
 
 // SIGNUP FUNCTION
@@ -75,5 +75,5 @@ function signup(name, email, password, role) {
   localStorage.setItem("users", JSON.stringify(users));
 
   alert("Signup successful! Please login.");
-  window.location.href = "/pages/login.html";
+  window.location.href = "login.html";
 }
