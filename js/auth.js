@@ -36,7 +36,7 @@ function requireAuth(requiredRole = null) {
   }
   if (requiredRole && user.role !== requiredRole) {
     alert("Access denied");
-    window.location.href = "/pages/index.html";
+    window.location.href = "../index.html";
   }
 }
 
@@ -51,7 +51,7 @@ function login(email, password) {
   }
 
   localStorage.setItem("currentUser", JSON.stringify(user));
-  window.location.href = "/pages/index.html";
+  window.location.href = "../index.html";
 }
 
 // SIGNUP FUNCTION

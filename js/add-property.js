@@ -30,5 +30,5 @@ form.addEventListener("submit", (e) => {
   }
 
   localStorage.setItem("properties", JSON.stringify(properties.filter(p => p.id > 3)));
-  window.location.href = "listings.html";
+  window.location.href = "listing.html";
 });

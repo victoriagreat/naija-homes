@@ -29,7 +29,7 @@ body {
 /* HERO */
 .hero {
   background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-              url('../images/hero.jpg') center/cover;
+              url('/images/house1.jpg') center/cover;
   color: white;
   padding: 100px 20px;
   text-align: center;
@@ -93,7 +93,7 @@ body {
 .property-card a {
   display: inline-block;
   margin-top: 10px;
-  color: #0d6efd;
+  color:white;
   text-decoration: none;
   font-weight: bold;
 }
