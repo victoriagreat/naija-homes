@@ -1,3 +1,7 @@
+/* =======================
+   NaijaHomes Green & White Theme
+   ======================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -10,9 +14,11 @@ body {
   color: #333;
 }
 
-/* NAVBAR */
+/* =======================
+   NAVBAR
+   ======================= */
 .navbar {
-  background: #0d6efd;
+  background: #28a745; /* primary green */
   color: white;
   padding: 15px 40px;
   display: flex;
@@ -26,10 +32,12 @@ body {
   text-decoration: none;
 }
 
-/* HERO */
+/* =======================
+   HERO SECTION
+   ======================= */
 .hero {
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-              url('/images/house1.jpg') center/cover;
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+              url('/images/house1.jpg') center/cover no-repeat;
   color: white;
   padding: 100px 20px;
   text-align: center;
@@ -39,22 +47,31 @@ body {
   margin-top: 20px;
 }
 
-.search-box input, .search-box button {
+.search-box input,
+.search-box button {
   padding: 12px;
   margin: 5px;
   width: 200px;
 }
 
 .search-box button {
-  background: #0d6efd;
+  background: #28a745;
   color: white;
   border: none;
   cursor: pointer;
 }
 
-/* FEATURED */
+/* =======================
+   FEATURED SECTION
+   ======================= */
 .featured {
   padding: 40px;
+}
+
+.featured h2 {
+  color: #28a745;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .property-grid {
@@ -64,7 +81,9 @@ body {
   margin-top: 20px;
 }
 
-/* PROPERTY CARD */
+/* =======================
+   PROPERTY CARD
+   ======================= */
 .property-card {
   background: white;
   border-radius: 8px;
@@ -93,21 +112,28 @@ body {
 .property-card a {
   display: inline-block;
   margin-top: 10px;
-  color:white;
+  color: white; /* make links/buttons white */
   text-decoration: none;
   font-weight: bold;
+  background: #28a745;
+  padding: 6px 10px;
+  border-radius: 4px;
 }
 
-/* FOOTER */
+/* =======================
+   FOOTER
+   ======================= */
 footer {
   text-align: center;
   padding: 20px;
-  background: #222;
+  background: #28a745;
   color: white;
   margin-top: 40px;
 }
 
-/* LISTINGS PAGE */
+/* =======================
+   LISTINGS PAGE
+   ======================= */
 .listings-container {
   display: flex;
   padding: 40px;
@@ -126,14 +152,15 @@ footer {
   margin-bottom: 15px;
 }
 
-.filters input, .filters button {
+.filters input,
+.filters button {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
 }
 
 .filters button {
-  background: #0d6efd;
+  background: #28a745;
   color: white;
   border: none;
   cursor: pointer;
@@ -143,8 +170,9 @@ footer {
   flex: 1;
 }
 
-
-/* PROPERTY DETAILS PAGE */
+/* =======================
+   PROPERTY DETAILS PAGE
+   ======================= */
 .property-details {
   max-width: 1000px;
   margin: 40px auto;
@@ -170,7 +198,7 @@ footer {
 
 .property-info .price {
   font-size: 24px;
-  color: #0d6efd;
+  color: #28a745;
   margin: 10px 0;
 }
 
@@ -192,20 +220,22 @@ footer {
 }
 
 .btn-primary {
-  background: #0d6efd;
+  background: #28a745;
   color: white;
 }
 
 .btn-outline {
   background: transparent;
-  border: 2px solid #0d6efd;
-  color: #0d6efd;
+  border: 2px solid #28a745;
+  color: #28a745;
 }
 
-/* AUTH PAGES */
+/* =======================
+   AUTH PAGES
+   ======================= */
 .auth-body {
   min-height: 100vh;
-  background: linear-gradient(to right, #0d6efd, #6610f2);
+  background: linear-gradient(to right, #28a745, #66bb6a);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -232,18 +262,16 @@ footer {
 .auth-form button {
   width: 100%;
   padding: 12px;
-  background: #0d6efd;
+  background: #28a745;
   color: white;
   border: none;
   cursor: pointer;
   margin-top: 10px;
 }
 
-.auth-link {
-  margin-top: 15px;
-}
-
-/* DASHBOARD */
+/* =======================
+   DASHBOARD
+   ======================= */
 .dashboard {
   display: flex;
   min-height: 100vh;
@@ -251,7 +279,7 @@ footer {
 
 .sidebar {
   width: 220px;
-  background: #0d6efd;
+  background: #28a745;
   color: white;
   padding: 30px 20px;
 }
@@ -290,11 +318,13 @@ footer {
 
 .stat-card p {
   font-size: 24px;
-  color: #0d6efd;
+  color: #28a745;
   margin-top: 10px;
 }
 
-/* ADMIN TABLE */
+/* =======================
+   ADMIN TABLE
+   ======================= */
 .admin-table {
   width: 100%;
   border-collapse: collapse;
@@ -313,7 +343,6 @@ footer {
   background: #f0f0f0;
 }
 
-/* BUTTONS */
 .admin-table button {
   padding: 6px 10px;
   border: none;
@@ -326,7 +355,9 @@ footer {
   color: white;
 }
 
-/* STATUS BADGES */
+/* =======================
+   STATUS BADGES
+   ======================= */
 .badge {
   padding: 5px 10px;
   border-radius: 20px;
@@ -347,7 +378,9 @@ footer {
   color: #333;
 }
 
-
+/* =======================
+   RESPONSIVE
+   ======================= */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -357,9 +390,7 @@ footer {
   .navbar nav {
     margin-top: 10px;
   }
-}
 
-@media (max-width: 768px) {
   .listings-container {
     flex-direction: column;
   }
@@ -367,10 +398,7 @@ footer {
   .filters {
     width: 100%;
   }
-}
 
-
-@media (max-width: 768px) {
   .property-details img {
     height: 250px;
   }
@@ -378,17 +406,7 @@ footer {
   .property-info {
     padding: 20px;
   }
-}
 
-
-@media (max-width: 480px) {
-  .auth-container {
-    width: 90%;
-    padding: 25px;
-  }
-}
-
-@media (max-width: 768px) {
   .dashboard {
     flex-direction: column;
   }
@@ -401,5 +419,12 @@ footer {
 
   .sidebar a {
     margin: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-container {
+    width: 90%;
+    padding: 25px;
   }
 }
