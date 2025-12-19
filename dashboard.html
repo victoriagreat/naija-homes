@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>User Dashboard | NaijaHomes</title>
-  <link rel="stylesheet" href="/styles/styles.css">
+  <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
 
@@ -12,53 +12,86 @@
     <!-- SIDEBAR -->
     <aside class="sidebar">
       <h2>MyJiaHomes</h2>
-      <a href="#">Dashboard</a>
-      <a href="#">Saved Properties</a>
-      <a href="#">Bookings</a>
-      <a href="#">Payments</a>
-      <a href="#">Logout</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="saved.html">Saved Properties</a>
+      <a href="bookings.html">Bookings</a>
+      <a href="payments.html">Payments</a>
+      <a href="#" id="logoutBtn">Logout</a>
     </aside>
 
     <!-- MAIN CONTENT -->
     <main class="dashboard-content">
-
-      <h1>Welcome, Victoria 👋</h1>
+      <h1>Welcome!</h1>
 
       <!-- STATS -->
       <div class="stats">
         <div class="stat-card">
           <h3>Saved Properties</h3>
-          <p>4</p>
+          <p>0</p>
         </div>
         <div class="stat-card">
           <h3>Bookings</h3>
-          <p>2</p>
+          <p>0</p>
         </div>
         <div class="stat-card">
           <h3>Payments</h3>
-          <p>₦3,700,000</p>
+          <p>₦0</p>
         </div>
       </div>
 
       <!-- SAVED PROPERTIES -->
       <section>
         <h2>Saved Properties</h2>
-
-        <div class="property-grid">
-          <div class="property-card">
-            <img src="images/house1.jpg">
-            <div class="content">
-              <h3>3 Bedroom Apartment</h3>
-              <p>Lekki, Lagos</p>
-              <a href="#">View</a>
-            </div>
-          </div>
+        <div class="property-grid" id="savedPropertiesGrid">
+          <!-- Saved properties will be inserted dynamically -->
         </div>
       </section>
-
     </main>
-
   </div>
+
+  <!-- SCRIPTS -->
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Protect page for agents only
+      requireAuth("agent");
+
+      const user = getCurrentUser();
+      if (user) {
+        document.querySelector(".dashboard-content h1").innerText = `Welcome, ${user.name} 👋`;
+      }
+
+      // Logout
+      const logoutBtn = document.getElementById("logoutBtn");
+      logoutBtn.addEventListener("click", () => logout());
+
+      // Populate stats dynamically
+      const savedProperties = JSON.parse(localStorage.getItem("savedProperties")) || [];
+      const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+      const payments = JSON.parse(localStorage.getItem("payments")) || [];
+
+      const statCards = document.querySelectorAll(".stats .stat-card p");
+      statCards[0].innerText = savedProperties.length;
+      statCards[1].innerText = bookings.length;
+      statCards[2].innerText = `₦${payments.reduce((a,b)=>a+b,0).toLocaleString()}`;
+
+      // Populate saved properties grid
+      const grid = document.getElementById("savedPropertiesGrid");
+      savedProperties.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "property-card";
+        card.innerHTML = `
+          <img src="${p.image}">
+          <div class="content">
+            <h3>${p.title}</h3>
+            <p>${p.location}</p>
+            <a href="property.html?id=${p.id}">View</a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    });
+  </script>
 
 </body>
 </html>

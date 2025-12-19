@@ -55,11 +55,12 @@ function login(email, password) {
   if (user.role === "admin") {
     window.location.href = "admin.html";
   } else if (user.role === "agent") {
-    window.location.href = "dashboard.html";
+    window.location.href = "dashboard.html";  // agents → listings page
   } else {
-    window.location.href = "index.html";
+    window.location.href = "listing.html";  // regular users → listings page
   }
 }
+
 
 
 // SIGNUP FUNCTION
